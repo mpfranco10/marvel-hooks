@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/marvel-hooks/static/css/main.4bce79e8.css",
-    "main.js": "/marvel-hooks/static/js/main.1016f147.js",
+    "main.js": "/marvel-hooks/static/js/main.6ac851ea.js",
     "static/js/787.5cbf9f60.chunk.js": "/marvel-hooks/static/js/787.5cbf9f60.chunk.js",
     "index.html": "/marvel-hooks/index.html",
     "main.4bce79e8.css.map": "/marvel-hooks/static/css/main.4bce79e8.css.map",
-    "main.1016f147.js.map": "/marvel-hooks/static/js/main.1016f147.js.map",
+    "main.6ac851ea.js.map": "/marvel-hooks/static/js/main.6ac851ea.js.map",
     "787.5cbf9f60.chunk.js.map": "/marvel-hooks/static/js/787.5cbf9f60.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4bce79e8.css",
-    "static/js/main.1016f147.js"
+    "static/js/main.6ac851ea.js"
   ]
 }
