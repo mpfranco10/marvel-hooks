@@ -88,7 +88,7 @@ function App() {
         {isLoading && <Spinner animation="border" variant="primary" />}
         <Row >
           {results.map(hero =>
-            <Col xs={3} key={hero.id}>
+            <Col xs={12} md={6} xl={3} key={hero.id}>
               <HeroCard hero={hero}>
               </HeroCard>
             </Col>
