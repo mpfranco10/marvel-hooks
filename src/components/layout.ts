@@ -22,4 +22,5 @@ export const CharacterDetail = styled(Card)(({ theme }) => ({
   gap: theme.spacing(3),
   padding: theme.spacing(2),
   [mobile]: { gridTemplateColumns: "minmax(0, 1fr)" },
+  borderRadius: theme.spacing(4),
 })) as typeof Card;

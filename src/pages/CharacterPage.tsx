@@ -1,4 +1,12 @@
-import { Box, Button, CardMedia, Chip, Skeleton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Chip,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { CharacterDetail, PageShell, StatusCard } from "../components/layout";
 import { Link, useParams } from "react-router-dom";
 
@@ -50,6 +58,7 @@ export const CharacterPage = () => {
           variant="rounded"
           height={500}
           aria-label="Loading character details"
+          sx={{ mt: 7 }}
         />
       </PageShell>
     );
@@ -59,7 +68,9 @@ export const CharacterPage = () => {
     return (
       <PageShell component="main">
         <StatusCard>
-          <Typography variant="h6" component="h2" gutterBottom>We could not load this character</Typography>
+          <Typography variant="h6" component="h2" gutterBottom>
+            We could not load this character
+          </Typography>
           <Typography sx={{ mb: 2 }}>
             {error instanceof Error
               ? error.message
@@ -84,11 +95,31 @@ export const CharacterPage = () => {
       </Button>
 
       <CharacterDetail component="article">
-        <CardMedia component="img" image={getImageUrl(data)} alt={data.name} sx={{ width: "100%", height: "100%", minHeight: 440, objectFit: "cover", borderRadius: 1 }} />
+        <CardMedia
+          component="img"
+          image={getImageUrl(data)}
+          alt={data.name}
+          sx={{
+            width: "100%",
+            height: "100%",
+            minHeight: 440,
+            objectFit: "cover",
+            borderRadius: 1,
+          }}
+        />
 
         <Stack sx={{ justifyContent: "center" }}>
-          <Typography variant="subtitle2" component="p" color="text.secondary" gutterBottom>Character spotlight</Typography>
-          <Typography variant="h4" component="h1">{data.name}</Typography>
+          <Typography
+            variant="subtitle2"
+            component="p"
+            color="text.secondary"
+            gutterBottom
+          >
+            Character spotlight
+          </Typography>
+          <Typography variant="h4" component="h1">
+            {data.name}
+          </Typography>
 
           <Stack direction="row" sx={{ gap: 1, mt: 2, flexWrap: "wrap" }}>
             <Chip label={`${data.films.length} films`} />
@@ -96,16 +127,28 @@ export const CharacterPage = () => {
             <Chip label={`${data.videoGames.length} games`} />
           </Stack>
 
-          <Box sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: 3,
-            mt: 3
-          }}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              gap: 3,
+              mt: 3,
+            }}
+          >
             {visibleSections.map(({ label, values }) => (
               <Box component="section" key={label}>
-                <Typography variant="subtitle1" component="h2" gutterBottom>{label}</Typography>
-                <Box component="ul" sx={{ m: 0, pl: 2, color: "text.secondary", typography: "body2" }}>
+                <Typography variant="subtitle1" component="h2" gutterBottom>
+                  {label}
+                </Typography>
+                <Box
+                  component="ul"
+                  sx={{
+                    m: 0,
+                    pl: 2,
+                    color: "text.secondary",
+                    typography: "body2",
+                  }}
+                >
                   {values(data)
                     .slice(0, 8)
                     .map((item) => (
@@ -118,7 +161,12 @@ export const CharacterPage = () => {
 
           {data.url ? (
             <Stack direction="row" sx={{ gap: 1, mt: 3, flexWrap: "wrap" }}>
-              <Button href={data.url} target="_blank" rel="noreferrer" variant="outlined">
+              <Button
+                href={data.url}
+                target="_blank"
+                rel="noreferrer"
+                variant="outlined"
+              >
                 Disney API record
               </Button>
             </Stack>

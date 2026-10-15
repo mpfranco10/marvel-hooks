@@ -1,5 +1,13 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography, IconButton, SvgIcon } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import StarIcon from "@mui/icons-material/Star";
 
 import type { DisneyCharacter } from "../types/disney";
 
@@ -40,20 +48,58 @@ export const HeroCard = ({
   const navigate = useNavigate();
 
   return (
-    <Card component="article" variant="outlined" sx={{ position: "relative", height: "100%" }}>
+    <Card
+      component="article"
+      variant="outlined"
+      sx={{
+        position: "relative",
+        height: "100%",
+        borderRadius: 4,
+        cursor: "pointer",
+        transition: "box-shadow 0.2s ease, transform 0.2s ease",
+
+        "&:hover": {
+          boxShadow: 4,
+          transform: "translateY(-2px)",
+        },
+
+        "&:hover .character-image": {
+          transform: "scale(1.03)",
+          filter: "saturate(1.1) brightness(1.08)",
+        },
+      }}
+    >
       <CardActionArea
         onClick={() => navigate(`/character/${character._id}`)}
         aria-label={`Open ${character.name} profile`}
-        sx={{ display: "flex", flexDirection: "column", alignItems: "stretch", height: "100%" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch",
+          height: "100%",
+        }}
       >
         <CardMedia
           component="img"
+          className="character-image"
           src={getImageUrl(character)}
           alt={character.name}
-          sx={{ aspectRatio: "4 / 5", objectFit: "cover", bgcolor: "grey.100" }}
+          sx={{
+            aspectRatio: "4 / 3",
+            objectFit: "cover",
+            bgcolor: "grey.100",
+
+            // ligeramente apagada normalmente
+            filter: "saturate(0.85)",
+
+            // anima el cambio
+            transition: "transform 0.25s ease, filter 0.25s ease",
+          }}
         />
         <CardContent sx={{ flexGrow: 1 }}>
-          <Typography variant="h6" component="h2" gutterBottom>{character.name}</Typography>
+          <Typography variant="h6" gutterBottom>
+            {character.name}
+          </Typography>
           <Typography variant="body2" color="text.secondary" gutterBottom>
             {getCategoryLabel(character)}
           </Typography>
@@ -70,17 +116,15 @@ export const HeroCard = ({
             ? `Remove ${character.name} from favorites`
             : `Add ${character.name} to favorites`
         }
-        sx={{ position: "absolute", top: 8, right: 8, bgcolor: "background.paper", "&:hover": { bgcolor: "grey.100" } }}
+        sx={{
+          position: "absolute",
+          top: 8,
+          right: 8,
+          bgcolor: "background.paper",
+          "&:hover": { bgcolor: "grey.100" },
+        }}
       >
-        <SvgIcon>
-          <polygon
-            points="12,3 14.8,8.7 21,9.6 16.5,14 17.6,20.2 12,17.3 6.4,20.2 7.5,14 3,9.6 9.2,8.7"
-            fill={isFavorite ? "currentColor" : "none"}
-            stroke="currentColor"
-            strokeWidth={1.5}
-            strokeLinejoin="round"
-          />
-        </SvgIcon>
+        <StarIcon />
       </IconButton>
     </Card>
   );
