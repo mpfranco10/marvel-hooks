@@ -7,12 +7,12 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
 
-import { CardGrid, StatusCard, mobile } from "../components/layout";
 import { HeroCard } from "../components/HeroCard";
+import { CardGrid, StatusCard, mobile } from "../components/layout";
 import { SearchBar } from "../components/SearchBar";
 import { charactersQueryOptions, useCharacters } from "../hooks/useCharacters";
 import { useDebounce } from "../hooks/useDebounce";

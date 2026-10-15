@@ -29,18 +29,23 @@ vi.mock("../hooks/useCharacters", () => ({
       data: { data: [character], info: { totalPages: 2 } },
       isLoading: false,
       isFetching: false,
-      error: null
+      error: null,
     };
   },
   useCharacter: () => ({ data: character, isLoading: false, error: null }),
 }));
-afterEach(() => { cleanup(); window.localStorage.clear(); });
+afterEach(() => {
+  cleanup();
+  window.localStorage.clear();
+});
 
 it("preserves favorites, pagination, debounced search, clearing, and profile navigation", async () => {
   const user = userEvent.setup();
   render(
     <ThemeProvider theme={theme}>
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MemoryRouter
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/character/:id" element={<CharacterPage />} />
@@ -48,12 +53,20 @@ it("preserves favorites, pagination, debounced search, clearing, and profile nav
       </MemoryRouter>
     </ThemeProvider>,
   );
-  await user.click(screen.getByRole("button", { name: "Add Mickey Mouse to favorites" }));
+  await user.click(
+    screen.getByRole("button", { name: "Add Mickey Mouse to favorites" }),
+  );
   expect(window.localStorage.getItem("disney-favorites")).toBe("[4703]");
   await user.click(screen.getByRole("button", { name: "Favorites (1)" }));
-  expect(screen.getByRole("heading", { name: "Mickey Mouse" })).toBeInTheDocument();
-  await user.click(screen.getByRole("button", { name: "Remove Mickey Mouse from favorites" }));
-  expect(screen.getByText("No matching Disney characters were found")).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { name: "Mickey Mouse" }),
+  ).toBeInTheDocument();
+  await user.click(
+    screen.getByRole("button", { name: "Remove Mickey Mouse from favorites" }),
+  );
+  expect(
+    screen.getByText("No matching Disney characters were found"),
+  ).toBeInTheDocument();
   await user.click(screen.getByRole("button", { name: "Show all characters" }));
   await user.click(screen.getByRole("button", { name: "Next" }));
   expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
@@ -63,8 +76,12 @@ it("preserves favorites, pagination, debounced search, clearing, and profile nav
   expect(screen.getByText("Page 1 of 2")).toBeInTheDocument();
   await user.click(screen.getByRole("button", { name: "Clear" }));
   await waitFor(() => expect(query.searchTerm).toBe(""));
-  await user.click(screen.getByRole("button", { name: "Open Mickey Mouse profile" }));
-  expect(screen.getByRole("heading", { level: 1, name: "Mickey Mouse" })).toBeInTheDocument();
+  await user.click(
+    screen.getByRole("button", { name: "Open Mickey Mouse profile" }),
+  );
+  expect(
+    screen.getByRole("heading", { level: 1, name: "Mickey Mouse" }),
+  ).toBeInTheDocument();
   expect(screen.getByText("Fantasia")).toBeInTheDocument();
   await user.click(screen.getByRole("link", { name: /Back to directory/ }));
   expect(screen.getByRole("searchbox")).toBeInTheDocument();
